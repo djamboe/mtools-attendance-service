@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+
+message AttendanceRequest{
+    string api = 1;
+    double lat = 2;
+    double long = 3;
+    string userId = 4;
+    string description = 5;
+    string memberName = 6;
+    string imageUrl = 7;
+}
+
+message AttendanceResponse{
+    string api = 1;
+    string message = 2;
+    bool error = 3;
+}
+
+service AttendanceService{
+    rpc CreateAttendance(AttendanceRequest) returns (AttendanceResponse){
+        option (google.api.http) = {
+            post: "/v1/attendance/create"
+            body: "*"
+        };
+    }
+}
